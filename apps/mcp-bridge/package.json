@@ -1,0 +1,9 @@
+{
+  "name": "@arena/mcp-bridge",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/bridge.ts",
+  "dependencies": {
+    "@arena/core": "0.1.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@arena/core",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "Shared primitives: hashing, canonical JSON, typed errors, clocks. (Added to the recommended §17 layout as the shared-primitive layer.)"
+}

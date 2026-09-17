@@ -1,0 +1,32 @@
+{
+  "name": "arena-model-archive",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Private Apple-Silicon Electron archive for Arena.ai conversations: passive CDP capture, SQLCipher persistence, MCP-first operation. Implemented from the synthesized master plan; sandbox scope = all deterministic layers.",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "typecheck": "npx tsc -p tsconfig.json",
+    "test": "node --experimental-strip-types --no-warnings --test packages/*/src/*.test.ts apps/mcp-bridge/src/*.test.ts",
+    "doctor": "node --experimental-strip-types --no-warnings scripts/doctor.ts",
+    "gate:p0": "node scripts/gate-p0.ts",
+    "gate:p1": "node scripts/gate-p1.ts",
+    "gate:p2": "node scripts/gate-p2.ts",
+    "gate:p5": "node scripts/gate-p5.ts",
+    "report": "node scripts/report-html.ts",
+    "gates": "node --experimental-strip-types --no-warnings scripts/gate-p0.ts && node --experimental-strip-types --no-warnings scripts/gate-p1.ts && node --experimental-strip-types --no-warnings scripts/gate-p2.ts && node --experimental-strip-types --no-warnings scripts/gate-p5.ts && node --experimental-strip-types --no-warnings scripts/report-html.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  },
+  "dependencies": {
+    "zod": "^3.25.0"
+  }
+}

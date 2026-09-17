@@ -1,0 +1,20 @@
+{
+  "name": "@arena/desktop",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/main.ts",
+  "dependencies": {
+    "@arena/core": "0.1.0",
+    "@arena/schema": "0.1.0",
+    "@arena/security": "0.1.0",
+    "@arena/capture-core": "0.1.0",
+    "@arena/browser-adapter": "0.1.0",
+    "@arena/protocol-catalog": "0.1.0",
+    "@arena/archive-service": "0.1.0",
+    "@arena/artifacts": "0.1.0",
+    "@arena/sync": "0.1.0",
+    "@arena/analysis": "0.1.0",
+    "@arena/mcp-contract": "0.1.0",
+    "@arena/fixtures": "0.1.0"
+  }
+}

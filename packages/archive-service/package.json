@@ -1,0 +1,14 @@
+{
+  "name": "@arena/archive-service",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@arena/core": "0.1.0",
+    "@arena/schema": "0.1.0",
+    "@arena/security": "0.1.0",
+    "@arena/capture-core": "0.1.0",
+    "@arena/protocol-catalog": "0.1.0",
+    "@arena/artifacts": "0.1.0"
+  }
+}
