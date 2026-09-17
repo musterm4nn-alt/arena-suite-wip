@@ -1,0 +1,33 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+# Keep gate artifacts for evidence — do not ignore p0/p1, but ignore large temp gates
+# artifacts/gates/*.json
+!artifacts/gates/.gitkeep
+*.sock
+*.db
+*.enc
+.tmp/
+coverage/
+.parcel-cache/
+.vite/
+.next/
+out/
+build/
+.env
+*.tsbuildinfo
+
+# OS keychain simulation
+*.keychain.json
+
+# Electron
+apps/desktop/dist/
+apps/desktop/out/
+
+# Archive data
+/Library/Application Support/ArenaArchive/
+.config/arena-archive/
+tmp/arena-test-partitions/
+tmp/arena-p1-*/
+tmp/arena-archive-downloads/

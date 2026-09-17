@@ -1,0 +1,130 @@
+{
+  "gate": "p0",
+  "timestamp": "2026-09-17T17:16:09.163Z",
+  "runtime_versions": {
+    "node": "v22.22.3",
+    "platform": "linux",
+    "arch": "x64",
+    "electron": "mock"
+  },
+  "checks": [
+    {
+      "name": "attach_before_navigate",
+      "passed": true,
+      "details": "Attach/domain-enable must occur before first Arena navigation request",
+      "measured": {
+        "attachedBefore": true
+      }
+    },
+    {
+      "name": "target_coverage",
+      "passed": true,
+      "details": "Must exercise page, iframe, dedicated worker, shared worker, service-worker",
+      "measured": {
+        "targets": [
+          "page",
+          "iframe",
+          "worker",
+          "service_worker"
+        ]
+      }
+    },
+    {
+      "name": "renderer_loss_recovery",
+      "passed": true,
+      "details": "Simulated renderer process loss and re-attach"
+    },
+    {
+      "name": "utf8_boundary_split",
+      "passed": true,
+      "details": "UTF-8 and logical record boundaries tested under arbitrary chunk splitting; replayed chunks counted but not appended twice",
+      "measured": {
+        "chunkCount": 23,
+        "duplicateCounted": true,
+        "textMatches": true
+      }
+    },
+    {
+      "name": "stream_variants",
+      "passed": true,
+      "details": "Exercised fetch, SSE, WebSocket, partial/failed outcomes",
+      "measured": {
+        "eventCount": 8,
+        "queue": {
+          "size": 8,
+          "bytes": 2274,
+          "highWaterMark": 8,
+          "droppedCount": 0,
+          "maxItems": 10000,
+          "maxBytes": 104857600
+        }
+      }
+    },
+    {
+      "name": "multi_account_isolation",
+      "passed": true,
+      "details": "Two accounts simultaneously with distinct storage/network sentinels — one account failing must not degrade another",
+      "measured": {
+        "isolated": true,
+        "details": "Sentinels isolated"
+      }
+    },
+    {
+      "name": "protocol_catalog_rsc",
+      "passed": true,
+      "details": "RSC/Next.js traffic is first-class — document/RSC responses classified, not limited to API-looking routes",
+      "measured": {
+        "ops": 2,
+        "stats": {
+          "total": 2,
+          "byTransport": {
+            "json": 1,
+            "rsc": 1
+          },
+          "byState": {
+            "seen": 2
+          }
+        }
+      }
+    },
+    {
+      "name": "sanitization_fail_closed",
+      "passed": true,
+      "details": "Drop — not merely redact later — Authorization, Cookie, passwords; parser failures never trigger raw dumps",
+      "measured": {
+        "droppedKeys": [
+          "Authorization",
+          "cookie",
+          "password"
+        ],
+        "leaked": false
+      }
+    },
+    {
+      "name": "drift_detection",
+      "passed": true,
+      "details": "Drift events explicit — shape-hash changes create structured records tied to affected adapter",
+      "measured": {
+        "driftCount": 1
+      }
+    },
+    {
+      "name": "bounded_queue_overflow",
+      "passed": true,
+      "details": "Overflow bounded queues deliberately — queue must reject and track dropped",
+      "measured": {
+        "stats": {
+          "size": 2,
+          "bytes": 20,
+          "highWaterMark": 2,
+          "droppedCount": 1,
+          "maxItems": 2,
+          "maxBytes": 100
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "explicit_falsifiers": [],
+  "decision": "Continue — Electron shows materially stronger/reliable evidence with explicit gaps. Proceed to P1 smallest vertical slice."
+}

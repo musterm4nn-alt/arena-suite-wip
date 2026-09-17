@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../schema" },
+    { "path": "../protocol-catalog" },
+    { "path": "../security" },
+    { "path": "../capture-core" }
+  ]
+}

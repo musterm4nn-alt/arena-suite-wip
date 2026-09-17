@@ -1,0 +1,23 @@
+{
+  "name": "@arena/desktop",
+  "version": "0.1.0",
+  "main": "dist/main/main.js",
+  "types": "dist/main/main.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit",
+    "start": "electron dist/main/main.js"
+  },
+  "dependencies": {
+    "@arena/schema": "*",
+    "@arena/security": "*",
+    "@arena/capture-core": "*",
+    "@arena/protocol-catalog": "*",
+    "@arena/archive-service": "*",
+    "@arena/artifacts": "*",
+    "@arena/browser-adapter": "*",
+    "@arena/mcp-contract": "*",
+    "@arena/sync": "*",
+    "zod": "^3.23.8"
+  }
+}

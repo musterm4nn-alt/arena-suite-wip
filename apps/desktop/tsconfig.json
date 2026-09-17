@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../packages/schema" },
+    { "path": "../../packages/security" },
+    { "path": "../../packages/capture-core" },
+    { "path": "../../packages/protocol-catalog" },
+    { "path": "../../packages/archive-service" },
+    { "path": "../../packages/artifacts" },
+    { "path": "../../packages/browser-adapter" },
+    { "path": "../../packages/mcp-contract" },
+    { "path": "../../packages/sync" }
+  ]
+}

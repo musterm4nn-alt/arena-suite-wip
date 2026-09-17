@@ -1,0 +1,63 @@
+{
+  "gate": "p1",
+  "timestamp": "2026-09-17T17:16:27.118Z",
+  "runtime_versions": {
+    "node": "v22.22.3",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "checks": [
+    {
+      "name": "one_account",
+      "passed": true,
+      "details": "Created account aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa partition=/tmp/arena-p1-1789665387109/partitions/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+    },
+    {
+      "name": "one_complete_stream",
+      "passed": true,
+      "details": "Complete stream ingested observation=917530b3-20b1-42b7-986b-287dea1c79e8 isComplete=true"
+    },
+    {
+      "name": "crash_partial_stream",
+      "passed": true,
+      "details": "Crash produced partial_stream observation=d81a9720-b419-429a-90c2-ae187a7fa873"
+    },
+    {
+      "name": "observation_journal",
+      "passed": true,
+      "details": "Journal has 2 observations — first durable write is append-only observations record in SQLCipher"
+    },
+    {
+      "name": "transcript_query_mcp",
+      "passed": true,
+      "details": "MCP transcript query succeeded: {\"query\":\"hello\",\"results\":[{\"turn_id\":\"turn-1\",\"text\":\"Hello world complete stream\",\"account_id\":\"a"
+    },
+    {
+      "name": "provenance_lookup",
+      "passed": true,
+      "details": "Provenance lookup: every important normalized field points to observation records"
+    },
+    {
+      "name": "directive_creation_trusted",
+      "passed": true,
+      "details": "Directive minted by trusted context: 3ddf66e9-9ff8-494d-89a4-ea875e1d6934 scope_hash=3adad113"
+    },
+    {
+      "name": "mcp_cannot_mint_deletion",
+      "passed": true,
+      "details": "MCP cannot mint approval — deletion requires directive from trusted GUI/CLI"
+    },
+    {
+      "name": "directive_verification",
+      "passed": true,
+      "details": "Directive verification: ok"
+    },
+    {
+      "name": "directive_single_use",
+      "passed": true,
+      "details": "Directive single-use — replay returns E_CONFIRM_REQUIRED"
+    }
+  ],
+  "passed": true,
+  "decision": "P1 vertical slice proved browser → sanitizer → storage → transcript → MCP"
+}

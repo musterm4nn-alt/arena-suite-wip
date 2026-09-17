@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-09-17T17:15:39.728Z",
+  "platform": "linux",
+  "arch": "x64",
+  "node": "v22.22.3",
+  "checks": [
+    {
+      "name": "node_version",
+      "ok": true,
+      "details": "Node v22.22.3 >=20 required"
+    },
+    {
+      "name": "electron_pinned",
+      "ok": true,
+      "details": "Electron version: ^34.2.0 — should be pinned stable major 34.x"
+    },
+    {
+      "name": "macos",
+      "ok": false,
+      "details": "Not macOS — linux — P0 spike can run in mock mode but real capture requires macOS"
+    },
+    {
+      "name": "data_dir_perms",
+      "ok": true,
+      "details": "Data dir /home/user/.config/arena-archive mode=700 should be 700"
+    },
+    {
+      "name": "build",
+      "ok": true,
+      "details": "TypeScript build artifacts exist"
+    },
+    {
+      "name": "gate_dir",
+      "ok": true,
+      "details": "artifacts/gates exists"
+    }
+  ],
+  "overall_ok": false
+}

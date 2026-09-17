@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Arena Archive Diagnostics</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none';">
+<style>
+  body { font-family: monospace; padding: 20px; background: #0a0a0a; color: #e0e0e0; }
+  h1 { color: #fff; }
+  .card { background: #1a1a1a; border: 1px solid #333; padding: 16px; margin: 12px 0; border-radius: 8px; }
+  .ok { color: #4f4; }
+  .fail { color: #f44; }
+  button { background: #333; color: #fff; border: 1px solid #555; padding: 8px 16px; cursor: pointer; border-radius: 4px; }
+  button:hover { background: #444; }
+  pre { background: #111; padding: 12px; overflow: auto; border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>Arena Model Archive — Diagnostics</h1>
+<p>Local app origin, strict CSP, narrow context bridge. GUI and MCP call same typed service registry so semantics cannot drift.</p>
+
+<div class="card">
+<h2>Capabilities (diagnostics_capabilities)</h2>
+<p>Recommended first call — explains unavailable/degraded features rather than hiding tools</p>
+<button onclick="loadCaps()">Load Capabilities</button>
+<pre id="caps">Click load...</pre>
+</div>
+
+<div class="card">
+<h2>Accounts</h2>
+<button onclick="loadAccounts()">List Accounts</button>
+<pre id="accounts">Click load...</pre>
+</div>
+
+<div class="card">
+<h2>Capture Status</h2>
+<button onclick="loadCapture()">Capture Status</button>
+<pre id="capture">Click load...</pre>
+</div>
+
+<div class="card">
+<h2>Protocol Catalog</h2>
+<button onclick="loadCatalog()">Protocol Catalog</button>
+<pre id="catalog">Click load...</pre>
+</div>
+
+<div class="card">
+<h2>Storage Health</h2>
+<button onclick="loadStorage()">Storage Health</button>
+<pre id="storage">Click load...</pre>
+</div>
+
+<div class="card">
+<h2>Threat Model Notes</h2>
+<ul>
+<li>Arena renderers: sandbox:true, contextIsolation:true, nodeIntegration:false, no preload API</li>
+<li>Archive service is sole writer</li>
+<li>Key broker transient only</li>
+<li>Remote content is data, never authority</li>
+<li>Account scope is part of identity</li>
+</ul>
+</div>
+
+<script>
+// Narrow context bridge — only typed service calls, no generic JS execution
+// In real Electron, this would be via window.api.invoke(channel, args)
+// Mock for now
+async function invoke(channel, args) {
+  return { mock: true, channel, args, message: 'Mock — real would call archive service via IPC' };
+}
+
+async function loadCaps() {
+  const el = document.getElementById('caps');
+  el.textContent = 'Loading...';
+  try {
+    const res = await invoke('diagnostics:get-caps', {});
+    el.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    el.textContent = 'Error: ' + e.message;
+  }
+}
+
+async function loadAccounts() {
+  const el = document.getElementById('accounts');
+  el.textContent = 'Loading...';
+  try {
+    const res = await invoke('accounts:list', {});
+    el.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    el.textContent = 'Error: ' + e.message;
+  }
+}
+
+async function loadCapture() {
+  const el = document.getElementById('capture');
+  el.textContent = 'Loading...';
+  try {
+    const res = await invoke('capture:status', { all: true });
+    el.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    el.textContent = 'Error: ' + e.message;
+  }
+}
+
+async function loadCatalog() {
+  const el = document.getElementById('catalog');
+  el.textContent = 'Loading...';
+  try {
+    const res = await invoke('diagnostics:get-protocol-catalog', {});
+    el.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    el.textContent = 'Error: ' + e.message;
+  }
+}
+
+async function loadStorage() {
+  const el = document.getElementById('storage');
+  el.textContent = 'Loading...';
+  try {
+    const res = await invoke('diagnostics:get-storage-health', {});
+    el.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    el.textContent = 'Error: ' + e.message;
+  }
+}
+</script>
+</body>
+</html>
