@@ -1,0 +1,27 @@
+{
+  "name": "@arena-archive/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "electron dist/main.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@arena-archive/browser-adapter": "*",
+    "@arena-archive/capture-core": "*",
+    "@arena-archive/protocol-catalog": "*",
+    "@arena-archive/archive-service": "*",
+    "@arena-archive/artifacts": "*",
+    "@arena-archive/schema": "*",
+    "@arena-archive/security": "*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "electron": "^32.3.3",
+    "typescript": "^5.6.3"
+  }
+}

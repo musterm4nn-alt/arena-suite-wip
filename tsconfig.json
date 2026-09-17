@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "types": ["node"]
+  },
+  "references": [
+    { "path": "./packages/schema" },
+    { "path": "./packages/security" },
+    { "path": "./packages/browser-adapter" },
+    { "path": "./packages/capture-core" },
+    { "path": "./packages/protocol-catalog" },
+    { "path": "./packages/archive-service" },
+    { "path": "./packages/artifacts" },
+    { "path": "./packages/sync" },
+    { "path": "./packages/mcp-contract" },
+    { "path": "./packages/analysis" },
+    { "path": "./apps/desktop" },
+    { "path": "./apps/mcp-bridge" }
+  ],
+  "include": []
+}

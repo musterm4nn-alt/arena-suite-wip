@@ -1,0 +1,20 @@
+{
+  "test_version": "p1-v1",
+  "timestamp": "2026-09-17T17:16:52.957Z",
+  "passed": [
+    "complete_stream_storage",
+    "partial_stream_on_crash",
+    "transcript_query_via_search",
+    "provenance_lookup",
+    "delete_directive_mint_verify"
+  ],
+  "failed": [],
+  "measured_facts": {
+    "account_id": "07ef0d13-69af-49d5-80f3-8ccc579d4852",
+    "turn_id": "turn-26aedcb2-e7ac-48cc-9fce-c6bf98448c6e",
+    "conversation_id": "conv-5bd680d9-f2bc-4ce9-8815-29b809713a46",
+    "observations": 2,
+    "directive_id": "1bd82f832cbb81842f906f4091513d84"
+  },
+  "explicit_falsifiers": []
+}

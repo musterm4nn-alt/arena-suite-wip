@@ -1,0 +1,20 @@
+{
+  "name": "@arena-archive/mcp-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node dist/index.js"
+  },
+  "dependencies": {
+    "@arena-archive/mcp-contract": "*",
+    "@arena-archive/archive-service": "*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "typescript": "^5.6.3"
+  }
+}

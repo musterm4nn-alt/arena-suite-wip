@@ -1,0 +1,118 @@
+{
+  "test_version": "p0-v1",
+  "runtime_versions": {
+    "node": "v22.22.3",
+    "electron": "32.3.3",
+    "chromium": "128.0.6613.137",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "timestamp": "2026-09-17T17:16:52.783Z",
+  "passed": [
+    "dual_account_isolation",
+    "attach_before_navigate",
+    "target_page",
+    "target_iframe",
+    "target_dedicated_worker",
+    "target_shared_worker",
+    "target_service_worker",
+    "freeze_arm_resume_child_targets",
+    "force_navigation_during_stream",
+    "renderer_crash_during_stream",
+    "utf8_boundary_splitting",
+    "duplicate_chunk_handling",
+    "bounded_queue_overflow",
+    "transport_chunked",
+    "transport_sse",
+    "transport_websocket",
+    "transport_rsc",
+    "transport_json",
+    "download_start",
+    "account_id_stamping_authority",
+    "p0_decision_continue"
+  ],
+  "failed": [],
+  "measured_facts": {
+    "accounts_created": [
+      "a39fd7ea-cb4b-4ea0-861c-7d82dbd0ad81",
+      "0da7ec2c-d14f-4d30-be9f-b2f5b87ba7f1"
+    ],
+    "attach_ordering": {
+      "attachTimestamp": 1789665412771,
+      "firstRequestTimestamp": 1789665412776,
+      "orderingValid": true
+    },
+    "target_matrix": {
+      "page": true,
+      "iframe": true,
+      "dedicated_worker": true,
+      "shared_worker": true,
+      "service_worker": true,
+      "worker": true,
+      "other": false
+    },
+    "child_targets_observed": 5,
+    "utf8_boundary_tests": {
+      "total": 7,
+      "passed": 7
+    },
+    "duplicate_test": {
+      "expected": "Hello world!",
+      "got": "Hello world!",
+      "duplicateCount": 2
+    },
+    "queue_overflow": {
+      "enqueued": 5,
+      "dropped": 15
+    },
+    "transports_observed": [
+      "chunked",
+      "rsc",
+      "sse",
+      "websocket"
+    ],
+    "download_test": {
+      "staged": "0cf36172787f99fef990fee56227b0c2",
+      "sealed": "sealed/0cf36172787f99fef990fee56227b0c2.enc"
+    },
+    "account_stamping_test": "supervisor-derived wins",
+    "decision": "continue",
+    "archive_metrics": {
+      "observations": 10,
+      "conversations": 2,
+      "turns": 5,
+      "accounts": 2
+    },
+    "protocol_ops_count": 6,
+    "drift_events_count": 0
+  },
+  "explicit_falsifiers": [],
+  "target_matrix": {
+    "page": true,
+    "iframe": true,
+    "dedicated_worker": true,
+    "shared_worker": true,
+    "service_worker": true,
+    "worker": true,
+    "other": false
+  },
+  "attach_ordering": {
+    "attachTimestamp": 1789665412771,
+    "firstRequestTimestamp": 1789665412776,
+    "orderingValid": true
+  },
+  "checks": {
+    "attach_before_navigate": true,
+    "dual_account_isolation": true,
+    "target_page": true,
+    "target_iframe": true,
+    "target_dedicated_worker": true,
+    "target_shared_worker": true,
+    "target_service_worker": true,
+    "utf8_boundary": true,
+    "duplicate_handling": true,
+    "queue_overflow": true,
+    "download_start": true,
+    "account_stamping": true
+  }
+}

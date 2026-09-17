@@ -1,0 +1,20 @@
+node_modules
+dist
+*.log
+.DS_Store
+*.tsbuildinfo
+# Electron build
+out
+# Archive data (never commit real archive)
+*.db
+*.enc
+*.sock
+# OS
+Thumbs.db
+
+# Keep empty dirs but allow gate artifacts (they are part of evidence register)
+!artifacts/gates/
+!artifacts/gates/.gitkeep
+!artifacts/gates/*.json
+
+
