@@ -10,6 +10,13 @@ dist/
 *.enc
 .tmp/
 coverage/
+# Compiled scripts from root tsc -b (should be run via tsx, not tsc)
+scripts/*.js
+scripts/*.d.ts
+scripts/*.map
+vitest.*.js
+vitest.*.d.ts
+vitest.*.map
 .parcel-cache/
 .vite/
 .next/
