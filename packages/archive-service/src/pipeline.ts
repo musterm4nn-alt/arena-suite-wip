@@ -64,6 +64,11 @@ export class CapturePipeline {
     });
   }
 
+  /** Owner-paused: new logical events are dropped (counted), never journaled;
+   * renderer_gone still passes so pending streams close honestly. */
+  paused = false;
+  droppedWhilePaused = 0;
+
   /** Attach an adapter's event stream for a bound account view. */
   attachAdapter(view: { onEvent(cb: (e: AdapterEvent) => void): () => void; accountId: string }, epochId: string | null): () => void {
     const off = view.onEvent((e) => { void this.ingest(e, view.accountId, epochId); });
@@ -73,6 +78,7 @@ export class CapturePipeline {
 
   async ingest(e: AdapterEvent, accountId: string, epochId: string | null): Promise<void> {
     const { router, queue } = this.#deps;
+    if (this.paused && e.type !== 'renderer_gone') { this.droppedWhilePaused++; return; }
     if (e.type === 'diagnostic' || e.type === 'protocol_step') return; // handled by supervisor
     if (e.type === 'renderer_gone') {
       this.#forceCloseAllForAccount(accountId, 'renderer_gone');
@@ -107,7 +113,6 @@ export class CapturePipeline {
         case 'Network.requestWillBeSent': {
           const rid = String(p.requestId);
           const req = (p.request ?? {}) as { url?: string; method?: string; headers?: Record<string, unknown> };
-          const routed = router.route({ mechanism: 'cdp_network', kind: 'request', observed_at: at, request_id: rid, payload: { url: req.url, method: req.method, headers: sanitizeHeaders(req.headers ?? {}).kept } }, { sessionId: cdp.sessionId });
           const payload = { url: req.url ?? '', method: (req.method ?? 'GET').toUpperCase(), headers: req.headers };
           let opKey: string;
           try {
@@ -119,7 +124,15 @@ export class CapturePipeline {
           } catch {
             opKey = 'unclassifiable';
           }
-          const ev: RoutedEvent = { ...(routed?.event ?? { mechanism: 'cdp_network', kind: 'request', observed_at: at, account_id: accountId, completeness: 'unknown' as CompletenessState }), request_id: rid, operation_key: opKey };
+          const rawReq = { mechanism: 'cdp_network' as const, kind: 'request' as const, observed_at: at, request_id: rid, payload: { url: req.url, method: req.method, headers: sanitizeHeaders(req.headers ?? {}).kept } };
+          // Direct-attach views deliver main-target events WITHOUT a sessionId; those
+          // belong to the view's own (supervisor-bound) account by construction. Only
+          // flattened child sessions need router lookup; hostile attribution is still
+          // impossible because accountId here comes from the attach, never the payload.
+          const routed = cdp.sessionId ? router.route(rawReq, { sessionId: cdp.sessionId }) : null;
+          const ev: RoutedEvent = routed
+            ? { ...routed.event, request_id: rid, operation_key: opKey }
+            : { ...rawReq, account_id: accountId, session_epoch_id: epochId ?? undefined, operation_key: opKey, completeness: 'unknown' as CompletenessState };
           queue.push(ev);
           this.#beginStream(rid, accountId, epochId, payload.url, payload.method, payload.headers as never);
           break;

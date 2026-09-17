@@ -20,7 +20,7 @@
     "gate:p2": "node scripts/gate-p2.ts",
     "gate:p5": "node scripts/gate-p5.ts",
     "report": "node scripts/report-html.ts",
-    "gates": "node --experimental-strip-types --no-warnings scripts/gate-p0.ts && node --experimental-strip-types --no-warnings scripts/gate-p1.ts && node --experimental-strip-types --no-warnings scripts/gate-p2.ts && node --experimental-strip-types --no-warnings scripts/gate-p5.ts && node --experimental-strip-types --no-warnings scripts/report-html.ts"
+    "gates": "node --experimental-strip-types --no-warnings scripts/gate-p0.ts && node --experimental-strip-types --no-warnings scripts/gate-p1.ts && node --experimental-strip-types --no-warnings scripts/gate-p2.ts && node --experimental-strip-types --no-warnings scripts/gate-p3.ts && node --experimental-strip-types --no-warnings scripts/gate-p5.ts && node --experimental-strip-types --no-warnings scripts/report-html.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

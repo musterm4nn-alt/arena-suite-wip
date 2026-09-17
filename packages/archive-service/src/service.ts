@@ -289,8 +289,8 @@ function buildCommands(): CommandDef[] {
       for (const [acct, v] of ctx.service.views) out[acct] = { paused: v.paused, epoch_id: v.epochId, ...v.pipeline.snapshot() };
       return out;
     }),
-    cmd('capture_pause', 'capture', accountScopeArg, (a, ctx) => { forEachAccount(ctx, a, (id) => { const v = ctx.service.views.get(id); if (v) v.paused = true; }); return { paused: true }; }),
-    cmd('capture_resume', 'capture', accountScopeArg, (a, ctx) => { forEachAccount(ctx, a, (id) => { const v = ctx.service.views.get(id); if (v) v.paused = false; }); return { resumed: true }; }),
+    cmd('capture_pause', 'capture', accountScopeArg, (a, ctx) => { forEachAccount(ctx, a, (id) => { const v = ctx.service.views.get(id); if (v) { v.paused = true; v.pipeline.paused = true; } }); return { paused: true }; }),
+    cmd('capture_resume', 'capture', accountScopeArg, (a, ctx) => { forEachAccount(ctx, a, (id) => { const v = ctx.service.views.get(id); if (v) { v.paused = false; v.pipeline.paused = false; } }); return { resumed: true }; }),
     cmd('capture_stop_all', 'capture', z.object({}), (_a, ctx) => { for (const id of [...ctx.service.views.keys()]) ctx.service.closeCapture(id); return { stopped: true }; }),
     cmd('capture_completeness', 'capture', z.object({ account_id: z.string() }), (a, ctx) => ({
       counts: ctx.service.store.countsByCompleteness(a.account_id),

@@ -51,6 +51,7 @@ node --experimental-strip-types --no-warnings scripts/doctor.ts
 node --experimental-strip-types --no-warnings scripts/gate-p0.ts
 node --experimental-strip-types --no-warnings scripts/gate-p1.ts
 node --experimental-strip-types --no-warnings scripts/gate-p2.ts
+node --experimental-strip-types --no-warnings scripts/gate-p3.ts
 node --experimental-strip-types --no-warnings scripts/gate-p5.ts
 node --experimental-strip-types --no-warnings scripts/report-html.ts
 ```
@@ -68,7 +69,8 @@ No build step: everything runs as type-stripped TypeScript (Node ≥ 22.6,
 | P1 vertical slice incl. live MCP socket | 8/8 ✓ |
 | P2 full-text capture + sync backfill + golden sweep | 10/10 ✓ |
 | P5 MCP parity (44/44 tools) + directive + lock + adversarial | 6/6 ✓ |
-| P3/P4/P6/P7 (search UX, encryption, GUI, release) | pending; blocked surfaces listed in `docs/platform.md` |
+| P3 multi-account trust & storage integrity | 8/8 ✓ |
+| P4/P6/P7 (SQLCipher encryption, GUI shell, release/signing) | blocked_env; falsifiers + unblock requirements in `docs/platform.md` |
 
 Reports use Departure Mono (SIL OFL, Helena Zhang) with system monospace
 fallback, per plan §18.

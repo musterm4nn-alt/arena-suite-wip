@@ -38,6 +38,7 @@ Companion machine-readable artifacts: `artifacts/gates/*.json`
 | **P0 gate**: attach order, target matrix, every-boundary UTF-8 split, duplicate replay, queue overflow, transport matrix (SSE/NDJSON/RSC/WS), completeness outcomes, navigation/crash disruption, two-account isolation, DevTools hazard, download sealing — 11/11 headless | `artifacts/gates/p0.json` |
 | **P1 gate**: vertical slice — capture → crash-partial → MCP transcript query over **real UDS socket** → provenance → canary scan of raw DB bytes → directive delete → restart durability — 8/8 | `artifacts/gates/p1.json` |
 | **P2 gate**: battle/direct/side-by-side modes, post-vote reveal claims, branch/regen isolation, promotion rules, worker-target capture, UI↔wire conflict recording, qualified backfill walk with idempotent replay, 36-way golden split sweep, download↔artifact linkage — 10/10 | `artifacts/gates/p2.json` |
+| **P3 gate**: two-account scoping across restart, pause truly halts ingest (dropped, never journaled), identity-rebind refusal with conflict journal, epoch rotation, credential canaries absent on success *and* error paths, crash-before-DB-commit staging cleanup, v1→v3 migration with live rows, backup/restore exact-parity + tamper refusal — 8/8 | `artifacts/gates/p3.json` |
 | **P5 gate**: 44/44 contract tools execute via `tools/call`, surface parity + forbidden absence, conservative lock semantics, directive scope binding + single-use, adversarial archived text inert — 6/6 | `artifacts/gates/p5.json` |
 
 ## 3. Blocked surfaces (require the real platform; never faked)
@@ -81,6 +82,14 @@ guess.
   minted local ids when not — identity is never inferred from UI focus (§2).
 - Sync checkpoints persist `sync_job` rows so crash-resume across process
   restarts is FK-checked, not best-effort.
+- `capture_pause` drops events at the ingest funnel (counted in
+  `droppedWhilePaused`); only `renderer_gone` passes so pending streams still
+  close honestly as `partial_stream`/`observer_gap`.
+- Direct-attach views attribute session-less CDP events to the view's own
+  (supervisor-bound) account; flattened child sessions resolve through the
+  router's target matrix. Attribution never reads the payload.
+- Plain-text SQLite here is a *reported* capability (`dbEncrypted:false`), and
+  P4 (SQLCipher), P6 (GUI shell), P7 (signing/release) stay blocked_env.
 
 ## 5. Running gates on the target platform
 
