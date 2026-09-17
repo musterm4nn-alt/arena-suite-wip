@@ -1,0 +1,31 @@
+name: ci
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  build-test-gate:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      # Linux runners only need Electron's types, not the binary.
+      ELECTRON_SKIP_BINARY_DOWNLOAD: ${{ matrix.os == 'ubuntu-latest' && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsx scripts/doctor.ts
+      - run: npm run build
+      - run: npx vitest run
+      - run: npx tsx scripts/gate-p0.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gate-p0-${{ matrix.os }}
+          path: artifacts/gates/p0.json

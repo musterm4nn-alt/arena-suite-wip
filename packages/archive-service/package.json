@@ -1,0 +1,20 @@
+{
+  "name": "@arena/archive-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@arena/capture-core": "0.1.0",
+    "@arena/mcp-contract": "0.1.0",
+    "@arena/protocol-catalog": "0.1.0",
+    "@arena/schema": "0.1.0",
+    "@arena/security": "0.1.0",
+    "@arena/sync": "0.1.0",
+    "zod": "^3.23.8"
+  }
+}

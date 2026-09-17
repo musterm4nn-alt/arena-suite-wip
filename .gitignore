@@ -1,0 +1,47 @@
+# Dependencies & build output
+node_modules/
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Electron / packaging
+apps/desktop/dist/
+apps/desktop/out/
+apps/desktop/.vite/
+*.dmg
+*.zip
+*.AppImage
+*.deb
+*.rpm
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Local runtime state (never commit partition data, journals, keys)
+data/
+partitions/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sock
+
+# Gate artifacts are committed ONLY as reviewed evidence; local runs go here (gitignored):
+artifacts/gates/local/
+
+# OS / editor
+.DS_Store
+.AppleDouble
+.LSOverride
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*

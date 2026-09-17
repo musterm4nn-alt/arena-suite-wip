@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../schema" },
+    { "path": "../capture-core" },
+    { "path": "../protocol-catalog" },
+    { "path": "../security" },
+    { "path": "../sync" },
+    { "path": "../mcp-contract" }
+  ]
+}

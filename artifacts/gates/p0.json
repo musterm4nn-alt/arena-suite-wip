@@ -1,0 +1,149 @@
+{
+  "gate": "p0",
+  "version": 1,
+  "at": "2026-09-17T16:59:25.694Z",
+  "runtime": {
+    "node": "v22.22.3",
+    "platform": "linux/x64"
+  },
+  "summary": {
+    "pass": 16,
+    "fail": 0,
+    "manual_pending": 6
+  },
+  "checks": [
+    {
+      "id": "p0-attach",
+      "name": "attach-before-navigate order",
+      "status": "pass",
+      "detail": "negative cases reject; positive case asserted in async section"
+    },
+    {
+      "id": "p0-attach-order-live",
+      "name": "fake attach satisfies full step order",
+      "status": "pass",
+      "detail": "12 steps verified"
+    },
+    {
+      "id": "p0-targets",
+      "name": "target matrix page/iframe/workers/SW",
+      "status": "pass",
+      "detail": "dedicated-worker,iframe,page,service-worker,shared-worker"
+    },
+    {
+      "id": "p0-ledger-sweep",
+      "name": "ledger reassembles every 1-cut split (multibyte SSE)",
+      "status": "pass",
+      "detail": "103 splits reassembled, terminal preserved"
+    },
+    {
+      "id": "p0-ledger-dup",
+      "name": "duplicate chunks counted, never double-appended",
+      "status": "pass",
+      "detail": "ok"
+    },
+    {
+      "id": "p0-queue-overflow",
+      "name": "bounded queue overflows into explicit gap markers",
+      "status": "pass",
+      "detail": "dropped=1"
+    },
+    {
+      "id": "p0-completeness",
+      "name": "completeness derivation matrix",
+      "status": "pass",
+      "detail": "6/6 endings correct"
+    },
+    {
+      "id": "p0-router-fuzz",
+      "name": "page-supplied account fields never win",
+      "status": "pass",
+      "detail": "4 hostile payloads contained"
+    },
+    {
+      "id": "p0-isolation",
+      "name": "two live sessions stay isolated (sentinels)",
+      "status": "pass",
+      "detail": "sentinels + storage disjoint"
+    },
+    {
+      "id": "p0-sanitize",
+      "name": "secret canaries dropped before persistence",
+      "status": "pass",
+      "detail": "canaries absent"
+    },
+    {
+      "id": "p0-directives",
+      "name": "directive for A cannot authorize B",
+      "status": "pass",
+      "detail": "scope binding holds, single-use holds"
+    },
+    {
+      "id": "p0-journal",
+      "name": "journal persists + enforces account scope",
+      "status": "pass",
+      "detail": "id=b7f723a5-2aa…"
+    },
+    {
+      "id": "p0-journal-scope",
+      "name": "cross-account journal read returns null",
+      "status": "pass",
+      "detail": "scoped"
+    },
+    {
+      "id": "p0-parity",
+      "name": "service registry enumerates full contract",
+      "status": "pass",
+      "detail": "44 tools"
+    },
+    {
+      "id": "p0-catalog",
+      "name": "unknown-by-default + probe-gated read + drift downgrade",
+      "status": "pass",
+      "detail": "defaults hold"
+    },
+    {
+      "id": "p0-suite",
+      "name": "full unit suite (vitest)",
+      "status": "pass",
+      "detail": "16 files, 75 tests passed"
+    },
+    {
+      "id": "p0-live-signin",
+      "name": "owner sign-in (email) in partition A",
+      "status": "manual-pending",
+      "detail": "template: account_uuid, epoch_id, partition_path, challenge_seen(y/n)"
+    },
+    {
+      "id": "p0-live-stream",
+      "name": "one real streamed turn captured complete",
+      "status": "manual-pending",
+      "detail": "template: conversation_ref, ledger_bytes, terminal_signal, completeness=complete"
+    },
+    {
+      "id": "p0-live-stop",
+      "name": "stop + navigation-during-stream endings",
+      "status": "manual-pending",
+      "detail": "template: stopped_by_user + partial_stream/observer_gap evidenced"
+    },
+    {
+      "id": "p0-live-vote",
+      "name": "reveal/vote workflow (where applicable)",
+      "status": "manual-pending",
+      "detail": "template: identity_claim rows (blind vs reveal), witness adapter version"
+    },
+    {
+      "id": "p0-live-artifact",
+      "name": "real artifact/download sealed",
+      "status": "manual-pending",
+      "detail": "template: blob_id, sha256, mime_sniffed, staging_removed(y/n)"
+    },
+    {
+      "id": "p0-live-exporter",
+      "name": "evidence-class comparison vs existing exporter",
+      "status": "manual-pending",
+      "detail": "template: classes+ gaps compared (NOT text equality)"
+    }
+  ],
+  "decision": "automated checks green; P0 NOT complete until manual owner-session evidence lands in docs/evidence-register.md"
+}

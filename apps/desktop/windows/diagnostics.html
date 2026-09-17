@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Strict CSP: local only, no remote resources. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'sha256-p0placeholder'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'; font-src 'none'; base-uri 'none'; form-action 'none';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arena Archive — Diagnostics (P0)</title>
+    <style>
+      body { font-family: ui-monospace, monospace; margin: 2rem; background: #111; color: #eee; }
+      pre { background: #1c1c1c; padding: 1rem; overflow: auto; }
+      .warn { color: #ffb020; }
+    </style>
+  </head>
+  <body>
+    <h1>Arena Archive — Diagnostics</h1>
+    <p class="warn">P0 spike shell: shows MCP capabilities via the same service registry as MCP.</p>
+    <pre id="out">loading…</pre>
+    <script>
+      (async () => {
+        const out = document.getElementById("out");
+        try {
+          const caps = await window.arenaArchive.capabilities();
+          out.textContent = JSON.stringify(caps, null, 2);
+        } catch (err) {
+          out.textContent = "error: " + String(err);
+        }
+      })();
+    </script>
+  </body>
+</html>

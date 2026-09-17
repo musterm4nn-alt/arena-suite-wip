@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "references": [
+    { "path": "./packages/schema" },
+    { "path": "./packages/capture-core" },
+    { "path": "./packages/protocol-catalog" },
+    { "path": "./packages/fixtures" },
+    { "path": "./packages/security" },
+    { "path": "./packages/artifacts" },
+    { "path": "./packages/sync" },
+    { "path": "./packages/mcp-contract" },
+    { "path": "./packages/analysis" },
+    { "path": "./packages/browser-adapter" },
+    { "path": "./packages/archive-service" },
+    { "path": "./apps/mcp-bridge" },
+    { "path": "./apps/desktop" }
+  ],
+  "include": ["scripts/**/*.ts"]
+}
