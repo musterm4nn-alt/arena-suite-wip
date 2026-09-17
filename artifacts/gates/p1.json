@@ -1,6 +1,6 @@
 {
   "gate": "p1",
-  "timestamp": "2026-09-17T17:16:27.118Z",
+  "timestamp": "2026-09-17T17:19:21.787Z",
   "runtime_versions": {
     "node": "v22.22.3",
     "platform": "linux",
@@ -10,17 +10,17 @@
     {
       "name": "one_account",
       "passed": true,
-      "details": "Created account aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa partition=/tmp/arena-p1-1789665387109/partitions/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+      "details": "Created account aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa partition=/tmp/arena-p1-1789665561776/partitions/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
     },
     {
       "name": "one_complete_stream",
       "passed": true,
-      "details": "Complete stream ingested observation=917530b3-20b1-42b7-986b-287dea1c79e8 isComplete=true"
+      "details": "Complete stream ingested observation=abc67750-bc2d-43cb-a364-53e0b013382c isComplete=true"
     },
     {
       "name": "crash_partial_stream",
       "passed": true,
-      "details": "Crash produced partial_stream observation=d81a9720-b419-429a-90c2-ae187a7fa873"
+      "details": "Crash produced partial_stream observation=2f13b051-3000-418b-bf6d-01157745b4e7"
     },
     {
       "name": "observation_journal",
@@ -40,7 +40,7 @@
     {
       "name": "directive_creation_trusted",
       "passed": true,
-      "details": "Directive minted by trusted context: 3ddf66e9-9ff8-494d-89a4-ea875e1d6934 scope_hash=3adad113"
+      "details": "Directive minted by trusted context: 0c75d69a-52b4-4e93-af01-09d1e71d67f1 scope_hash=3adad113"
     },
     {
       "name": "mcp_cannot_mint_deletion",

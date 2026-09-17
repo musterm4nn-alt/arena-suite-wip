@@ -1,6 +1,6 @@
 {
   "gate": "p0",
-  "timestamp": "2026-09-17T17:16:09.163Z",
+  "timestamp": "2026-09-17T17:19:17.563Z",
   "runtime_versions": {
     "node": "v22.22.3",
     "platform": "linux",
@@ -39,7 +39,7 @@
       "passed": true,
       "details": "UTF-8 and logical record boundaries tested under arbitrary chunk splitting; replayed chunks counted but not appended twice",
       "measured": {
-        "chunkCount": 23,
+        "chunkCount": 53,
         "duplicateCounted": true,
         "textMatches": true
       }

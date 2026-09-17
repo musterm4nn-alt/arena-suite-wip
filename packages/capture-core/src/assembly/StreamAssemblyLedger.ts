@@ -79,19 +79,20 @@ export class StreamAssemblyLedger {
     const hash = createHash('sha256').update(data).digest('hex');
     const seq = sequence ?? rec.chunks.length;
 
-    // Check duplicate by hash+sequence or byte equality of recent chunks
-    const existing = rec.chunks.find(c => c.sequence === seq && c.hash === hash);
-    if (existing) {
-      rec.duplicateCount++;
-      return { duplicate: true, record: rec };
-    }
-
-    // Also check exact duplicate bytes regardless of sequence (replayed chunk)
-    const byteDuplicate = rec.chunks.find(c => c.hash === hash && c.byteLength === data.length);
-    if (byteDuplicate) {
-      rec.duplicateCount++;
-      // Count but not append twice per spec
-      return { duplicate: true, record: rec };
+    // Check duplicate by sequence — replayed chunks counted but not appended twice per spec
+    // Only same sequence number with same hash is duplicate; same byte value at different positions is legitimate
+    const existingBySeq = rec.chunks.find(c => c.sequence === seq);
+    if (existingBySeq) {
+      if (existingBySeq.hash === hash && existingBySeq.byteLength === data.length) {
+        rec.duplicateCount++;
+        return { duplicate: true, record: rec };
+      } else {
+        // Same sequence but different content — conflict, treat as gap or overwrite? For now, count as duplicate and keep original
+        // This could happen on retry with different content — we keep first and track gap
+        rec.gapIntervals.push({ start: seq, end: seq + 1, reason: 'sequence_conflict' });
+        rec.duplicateCount++;
+        return { duplicate: true, record: rec };
+      }
     }
 
     if (rec.totalBytes + data.length > this.maxBytesPerRecord) {
@@ -192,18 +193,26 @@ export class StreamAssemblyLedger {
   }
 
   // For testing: split synthetic stream at every UTF-8 boundary
-  static splitAtUtf8Boundaries(text: string): Uint8Array[] {
+  // Deterministic version: split at every byte to test worst-case boundary handling
+  // Also provides random variant for property tests via optional param
+  static splitAtUtf8Boundaries(text: string, opts?: { random?: boolean }): Uint8Array[] {
     const encoder = new TextEncoder();
     const bytes = encoder.encode(text);
     const chunks: Uint8Array[] = [];
-    // Split at every possible boundary to test robustness
     let pos = 0;
+    const useRandom = opts?.random ?? false;
     while (pos < bytes.length) {
-      // Random split 1-4 bytes, but ensure we test boundary splitting
-      const sliceLen = Math.min(1 + Math.floor(Math.random() * 4), bytes.length - pos);
+      const sliceLen = useRandom
+        ? Math.min(1 + Math.floor(Math.random() * 4), bytes.length - pos)
+        : 1; // deterministic: 1 byte per chunk — most hostile for UTF-8 boundary testing
       chunks.push(bytes.slice(pos, pos + sliceLen));
       pos += sliceLen;
     }
     return chunks;
+  }
+
+  // For property tests that want random splitting
+  static splitAtUtf8BoundariesRandom(text: string): Uint8Array[] {
+    return this.splitAtUtf8Boundaries(text, { random: true });
   }
 }
